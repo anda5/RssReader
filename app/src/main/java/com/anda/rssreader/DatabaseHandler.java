@@ -65,14 +65,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
        return db.insert(TABLE_NAME_WEBSITE,null,cv);
     }
     public long insertRssFeedSiteObject(RssFeed rssfeed){
-        SQLiteDatabase db = this.getWritableDatabase();
+       SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = createRssFeedValues(rssfeed);
         return db.insert(TABLE_NAME_FEEDS,null,cv);
     }
 
     private ContentValues createRssFeedValues(RssFeed rssfeed) {
-        ContentValues cv=new ContentValues();
-        cv.put(KEY_FEED_ID,rssfeed.getId());
+        ContentValues cv = new ContentValues();
         cv.put(KEY_FEED_TITLE,rssfeed.getTitle());
         cv.put(KEY_FEED_DESCRIPTION,rssfeed.getDescription());
         cv.put(KEY_FEED_WEBSITE_ID,rssfeed.getWebSiteId());
@@ -83,8 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public ContentValues createWebSiteContentValues(WebSite website) {
-        ContentValues cv=new ContentValues();
-        cv.put(KEY_WEBSITE_ID,website.getId());
+        ContentValues cv = new ContentValues();
         cv.put(KEY_WEBSITE_TITLE,website.getTitle());
         cv.put(KEY_WEBSITE_DESCRIPTION,website.getDescription());
         cv.put(KEY_WEBSITE_SITE_LINK,website.getSiteLink());
