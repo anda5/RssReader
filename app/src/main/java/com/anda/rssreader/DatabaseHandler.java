@@ -35,22 +35,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
       String query = "CREATE TABLE "+TABLE_NAME_WEBSITE+"("+
-                   KEY_WEBSITE_ID +"INTEGER PRIMARY KEY ,"+
-                   KEY_WEBSITE_TITLE+"TEXT ,"+
-                   KEY_FEED_DESCRIPTION+"TEXT ,"+
-                   KEY_WEBSITE_SITE_LINK+ "TEXT ,"+
-                   KEY_WEBSITE_FEED_LINK+ "TEXT )";
+                   KEY_WEBSITE_ID +" INTEGER PRIMARY KEY ,"+
+                   KEY_WEBSITE_TITLE+" TEXT ,"+
+                   KEY_FEED_DESCRIPTION+" TEXT ,"+
+                   KEY_WEBSITE_SITE_LINK+ " TEXT ,"+
+                   KEY_WEBSITE_FEED_LINK+ " TEXT )";
       db.execSQL(query);
       
-      String query1 = "CREATE TABLE"+TABLE_NAME_FEEDS+"("+
-                      KEY_FEED_ID+"INTEGER PRIMARY KEY ,"+
-                      KEY_FEED_WEBSITE_ID+"INTEGER DEFAULT 0 REFERENCES"+TABLE_NAME_WEBSITE+
-                     "("+KEY_WEBSITE_ID+")"+"ON DELETE SET DEFAULT,"+
-                      KEY_FEED_TITLE+"TEXT ,"+
-                      KEY_FEED_DESCRIPTION+"TEXT ,"+
-                      KEY_FEED_FEED_LINK+"TEXT ,"+
-                      KEY_FEED_DATE+"TEXT ,"+
-                      KEY_FEED_IMAGE_URL+"TEXT)";
+      String query1 = "CREATE TABLE "+TABLE_NAME_FEEDS+"("+
+                      KEY_FEED_ID+" INTEGER PRIMARY KEY ,"+
+                      KEY_FEED_WEBSITE_ID+" INTEGER DEFAULT 0 REFERENCES "+TABLE_NAME_WEBSITE+
+                     "("+KEY_WEBSITE_ID+")"+"ON DELETE SET DEFAULT, "+
+                      KEY_FEED_TITLE+" TEXT ,"+
+                      KEY_FEED_DESCRIPTION+" TEXT ,"+
+                      KEY_FEED_FEED_LINK+" TEXT ,"+
+                      KEY_FEED_DATE+" TEXT ,"+
+                      KEY_FEED_IMAGE_URL+" TEXT)";
       db.execSQL(query1);
     }
 
@@ -83,7 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cv;
     }
 
-    private ContentValues createWebSiteContentValues(WebSite website) {
+    public ContentValues createWebSiteContentValues(WebSite website) {
         ContentValues cv=new ContentValues();
         cv.put(KEY_WEBSITE_ID,website.getId());
         cv.put(KEY_WEBSITE_TITLE,website.getTitle());
