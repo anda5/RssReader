@@ -17,8 +17,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      private static final String KEY_WEBSITE_ID = "wid";
      private static final String KEY_WEBSITE_TITLE = "wtitle";
      private static final String KEY_WEBSITE_DESCRIPTION = "wdesc";
-     private static final String KEY_WEBSITE_SITE_LINK="wslink";
-     private static final String KEY_WEBSITE_FEED_LINK="wflink";
+     private static final String KEY_WEBSITE_SITE_LINK = "wslink";
+     private static final String KEY_WEBSITE_FEED_LINK = "wflink";
 
      private static final String KEY_FEED_ID = "fid";
      private static final String KEY_FEED_WEBSITE_ID = "fwid";
@@ -34,15 +34,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-      String websiteQuery = "CREATE TABLE "+TABLE_NAME_WEBSITE+"("+
+        String websiteQuery = "CREATE TABLE "+TABLE_NAME_WEBSITE+"("+
                    KEY_WEBSITE_ID +" INTEGER PRIMARY KEY ,"+
                    KEY_WEBSITE_TITLE+" TEXT ,"+
-                   KEY_FEED_DESCRIPTION+" TEXT ,"+
+                   KEY_WEBSITE_DESCRIPTION+" TEXT ,"+
                    KEY_WEBSITE_SITE_LINK+ " TEXT ,"+
                    KEY_WEBSITE_FEED_LINK+ " TEXT )";
-      db.execSQL(websiteQuery);
+        db.execSQL(websiteQuery);
       
-      String feedQuery = "CREATE TABLE "+TABLE_NAME_FEEDS+"("+
+        String feedQuery = "CREATE TABLE "+TABLE_NAME_FEEDS+"("+
                       KEY_FEED_ID+" INTEGER PRIMARY KEY ,"+
                       KEY_FEED_WEBSITE_ID+" INTEGER, "+
                       KEY_FEED_TITLE+" TEXT ,"+
@@ -50,22 +50,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                       KEY_FEED_FEED_LINK+" TEXT ,"+
                       KEY_FEED_DATE+" TEXT ,"+
                       KEY_FEED_IMAGE_URL+" TEXT)";
-      db.execSQL(feedQuery);
+        db.execSQL(feedQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-      db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_FEEDS);
-      db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_WEBSITE);
-      onCreate(db);
+        db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_FEEDS);
+        db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_WEBSITE);
+        onCreate(db);
     }
+
     public long insertWebSiteObject(WebSite webSite){
-       SQLiteDatabase db = this.getWritableDatabase();
-       ContentValues  cv = createWebSiteContentValues(webSite);
-       return db.insert(TABLE_NAME_WEBSITE,null,cv);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues  cv = createWebSiteContentValues(webSite);
+        return db.insert(TABLE_NAME_WEBSITE,null,cv);
     }
+
     public long insertRssFeedSiteObject(RssFeed rssfeed){
-       SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = createRssFeedValues(rssfeed);
         return db.insert(TABLE_NAME_FEEDS,null,cv);
     }
@@ -86,7 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cv.put(KEY_WEBSITE_TITLE,website.getTitle());
         cv.put(KEY_WEBSITE_DESCRIPTION,website.getDescription());
         cv.put(KEY_WEBSITE_SITE_LINK,website.getSiteLink());
-        cv.put(KEY_FEED_FEED_LINK,website.getFeedLink());
+        cv.put(KEY_WEBSITE_FEED_LINK,website.getFeedLink());
         return cv;
     }
 }
