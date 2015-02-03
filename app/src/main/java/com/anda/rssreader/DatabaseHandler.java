@@ -17,8 +17,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      private static final String KEY_WEBSITE_ID = "wid";
      private static final String KEY_WEBSITE_TITLE = "wtitle";
      private static final String KEY_WEBSITE_DESCRIPTION = "wdesc";
-     private static final String KEY_WEBSITE_SITE_LINK="wslink";
-     private static final String KEY_WEBSITE_FEED_LINK="wflink";
+     private static final String KEY_WEBSITE_SITE_LINK = "wslink";
+     private static final String KEY_WEBSITE_FEED_LINK = "wflink";
 
      private static final String KEY_FEED_ID = "fid";
      private static final String KEY_FEED_WEBSITE_ID = "fwid";
@@ -34,37 +34,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-      String query = "CREATE TABLE "+TABLE_NAME_WEBSITE+"("+
-                   KEY_WEBSITE_ID +"INTEGER PRIMARY KEY ,"+
-                   KEY_WEBSITE_TITLE+"TEXT ,"+
-                   KEY_FEED_DESCRIPTION+"TEXT ,"+
-                   KEY_WEBSITE_SITE_LINK+ "TEXT ,"+
-                   KEY_WEBSITE_FEED_LINK+ "TEXT )";
-      db.execSQL(query);
+        String websiteQuery = "CREATE TABLE "+TABLE_NAME_WEBSITE+"("+
+                   KEY_WEBSITE_ID +" INTEGER PRIMARY KEY ,"+
+                   KEY_WEBSITE_TITLE+" TEXT ,"+
+                   KEY_WEBSITE_DESCRIPTION+" TEXT ,"+
+                   KEY_WEBSITE_SITE_LINK+ " TEXT ,"+
+                   KEY_WEBSITE_FEED_LINK+ " TEXT )";
+        db.execSQL(websiteQuery);
       
-      String query1 = "CREATE TABLE"+TABLE_NAME_FEEDS+"("+
-                      KEY_FEED_ID+"INTEGER PRIMARY KEY ,"+
-                      KEY_FEED_WEBSITE_ID+"INTEGER DEFAULT 0 REFERENCES"+TABLE_NAME_WEBSITE+
-                     "("+KEY_WEBSITE_ID+")"+"ON DELETE SET DEFAULT,"+
-                      KEY_FEED_TITLE+"TEXT ,"+
-                      KEY_FEED_DESCRIPTION+"TEXT ,"+
-                      KEY_FEED_FEED_LINK+"TEXT ,"+
-                      KEY_FEED_DATE+"TEXT ,"+
-                      KEY_FEED_IMAGE_URL+"TEXT)";
-      db.execSQL(query1);
+        String feedQuery = "CREATE TABLE "+TABLE_NAME_FEEDS+"("+
+                      KEY_FEED_ID+" INTEGER PRIMARY KEY ,"+
+                      KEY_FEED_WEBSITE_ID+" INTEGER, "+
+                      KEY_FEED_TITLE+" TEXT ,"+
+                      KEY_FEED_DESCRIPTION+" TEXT ,"+
+                      KEY_FEED_FEED_LINK+" TEXT ,"+
+                      KEY_FEED_DATE+" TEXT ,"+
+                      KEY_FEED_IMAGE_URL+" TEXT)";
+        db.execSQL(feedQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-      db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_FEEDS);
-      db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_WEBSITE);
-      onCreate(db);
+        db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_FEEDS);
+        db.execSQL("DROP TABLE IF EXIST"+TABLE_NAME_WEBSITE);
+        onCreate(db);
     }
+
     public long insertWebSiteObject(WebSite webSite){
-       SQLiteDatabase db = this.getWritableDatabase();
-       ContentValues  cv = createWebSiteContentValues(webSite);
-       return db.insert(TABLE_NAME_WEBSITE,null,cv);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues  cv = createWebSiteContentValues(webSite);
+        return db.insert(TABLE_NAME_WEBSITE,null,cv);
     }
+
     public long insertRssFeedSiteObject(RssFeed rssfeed){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = createRssFeedValues(rssfeed);
@@ -72,8 +73,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     private ContentValues createRssFeedValues(RssFeed rssfeed) {
-        ContentValues cv=new ContentValues();
-        cv.put(KEY_FEED_ID,rssfeed.getId());
+        ContentValues cv = new ContentValues();
         cv.put(KEY_FEED_TITLE,rssfeed.getTitle());
         cv.put(KEY_FEED_DESCRIPTION,rssfeed.getDescription());
         cv.put(KEY_FEED_WEBSITE_ID,rssfeed.getWebSiteId());
@@ -83,13 +83,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cv;
     }
 
-    private ContentValues createWebSiteContentValues(WebSite website) {
-        ContentValues cv=new ContentValues();
-        cv.put(KEY_WEBSITE_ID,website.getId());
+    public ContentValues createWebSiteContentValues(WebSite website) {
+        ContentValues cv = new ContentValues();
         cv.put(KEY_WEBSITE_TITLE,website.getTitle());
         cv.put(KEY_WEBSITE_DESCRIPTION,website.getDescription());
         cv.put(KEY_WEBSITE_SITE_LINK,website.getSiteLink());
-        cv.put(KEY_FEED_FEED_LINK,website.getFeedLink());
+        cv.put(KEY_WEBSITE_FEED_LINK,website.getFeedLink());
         return cv;
     }
 }
