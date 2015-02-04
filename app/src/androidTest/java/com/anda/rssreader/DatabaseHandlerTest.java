@@ -3,6 +3,8 @@ package com.anda.rssreader;
 import android.test.InstrumentationTestCase;
 
 import java.nio.channels.WritableByteChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anda on 1/30/2015.
@@ -36,13 +38,24 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
     private WebSite createWebSiteObject() {
         return new WebSite(websiteTitle,websiteDescription,webSiteLink,websiteFeedlink);
     }
+
     public void testDatabaseHandlerGet(){
         DatabaseHandler db=new DatabaseHandler(getInstrumentation().getTargetContext());
         db.insertWebSiteObject(createWebSiteObject());
         db.insertRssFeedSiteObject(createRssFeedObject());
-        WebSite webSites = db.getWebsiteObject(1);
+        WebSite webSite = db.getWebsiteObject(1);
         RssFeed rssFeed = db.getRssFeedObject(1);
-        assertEquals(1,webSites.getId());
+        assertEquals(1,webSite.getId());
         assertEquals(1,rssFeed.getId());
     }
+    public void testDatabaseHandlerGetList(){
+        DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
+        db.insertWebSiteObject(createWebSiteObject());
+        db.insertRssFeedSiteObject(createRssFeedObject());
+        List<WebSite> webSites = db.getWebsiteList();
+        List<RssFeed> rssFeeds = db.getRssFeedList();
+        assertFalse(webSites.isEmpty());
+        assertFalse(rssFeeds.isEmpty());
+    }
+
 }
