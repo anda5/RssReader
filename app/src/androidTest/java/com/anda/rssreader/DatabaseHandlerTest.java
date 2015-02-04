@@ -36,4 +36,13 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
     private WebSite createWebSiteObject() {
         return new WebSite(websiteTitle,websiteDescription,webSiteLink,websiteFeedlink);
     }
+    public void testDatabaseHandlerGet(){
+        DatabaseHandler db=new DatabaseHandler(getInstrumentation().getTargetContext());
+        db.insertWebSiteObject(createWebSiteObject());
+        db.insertRssFeedSiteObject(createRssFeedObject());
+        WebSite webSites = db.getWebsiteObject(1);
+        RssFeed rssFeed = db.getRssFeedObject(1);
+        assertEquals(1,webSites.getId());
+        assertEquals(1,rssFeed.getId());
+    }
 }
