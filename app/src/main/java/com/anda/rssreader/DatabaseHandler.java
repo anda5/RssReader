@@ -6,7 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import android.util.Log;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by anda on 1/30/2015.
@@ -134,6 +142,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }catch(SQLiteException e) {
             Log.d("SQL error", e.getMessage());
             return null;
+        }
+        return null;
+    }
+
+    public List<WebSite>  getWebsiteList(){
+        List<WebSite> webSiteList=new ArrayList<>();
+        String query = "select * from "+TABLE_NAME_WEBSITE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            while(cursor.moveToNext()){
+                WebSite webSite = new WebSite(Integer.parseInt(cursor.getString(0)),
+                                                               cursor.getString(1),
+                                                               cursor.getString(2),
+                                                               cursor.getString(3),
+                                                               cursor.getString(4));
+
+                webSiteList.add(webSite);
+            }
+        return  webSiteList;
+        }
+        return  null;
+    }
+
+    public List<RssFeed> getRssFeedList(){
+        List<RssFeed> feedlist = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select * from "+TABLE_NAME_FEEDS;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            while(cursor.moveToNext()){
+             RssFeed rssfeed = new RssFeed(Integer.parseInt(cursor.getString(0)),
+                                           Integer.parseInt(cursor.getString(1)),
+                                           cursor.getString(2),
+                                           cursor.getString(3),
+                                           cursor.getString(4),
+                                           cursor.getString(5),
+                                           cursor.getString(6));
+             feedlist.add(rssfeed);
+            }
+            return  feedlist;
         }
         return null;
     }
