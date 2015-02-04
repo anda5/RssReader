@@ -2,8 +2,11 @@ package com.anda.rssreader;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Created by anda on 1/30/2015.
@@ -90,5 +93,48 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cv.put(KEY_WEBSITE_SITE_LINK,website.getSiteLink());
         cv.put(KEY_WEBSITE_FEED_LINK,website.getFeedLink());
         return cv;
+    }
+    public WebSite getWebsiteObject(int id ){
+
+        String selectQuery = "select * from "+TABLE_NAME_WEBSITE+" where "+KEY_WEBSITE_ID +"="+id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        try {
+            if (cursor.moveToNext()) {
+                WebSite website = new WebSite(Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4));
+                return website;
+            }
+
+        }catch(SQLiteException e){
+            Log.d("SQL error", e.getMessage());
+            return null;
+        }
+        return null;
+    }
+    public RssFeed getRssFeedObject(int id ){
+
+        String selectQuery = "select * from "+TABLE_NAME_FEEDS+" where "+KEY_FEED_ID+"="+id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        try{
+            if(cursor.moveToFirst()){
+                RssFeed rssFeed = new RssFeed(Integer.parseInt(cursor.getString(0)),
+                        Integer.parseInt(cursor.getString(1)),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6));
+                return rssFeed;
+            }
+        }catch(SQLiteException e) {
+            Log.d("SQL error", e.getMessage());
+            return null;
+        }
+        return null;
     }
 }
