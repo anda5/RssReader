@@ -182,7 +182,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                            cursor.getString(6));
              feedlist.add(rssfeed);
             }
-            return  feedlist;
+        return  feedlist;
+        }
+        return null;
+    }
+
+    public List<RssFeed> getWebSiteRssFeedList(int webSiteId){
+        List<RssFeed> rssFeeds = new ArrayList<>();
+        String query = "select * from "+TABLE_NAME_FEEDS+" where "+KEY_FEED_WEBSITE_ID+"="+webSiteId;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst()){
+            while(cursor.moveToNext()){
+                RssFeed rssFeed = new RssFeed(Integer.parseInt(cursor.getString(0)),
+                                              Integer.parseInt(cursor.getString(1)),
+                                              cursor.getString(2),
+                                              cursor.getString(3),
+                                              cursor.getString(4),
+                                              cursor.getString(5),
+                                              cursor.getString(6));
+                rssFeeds.add(rssFeed);
+            }
+        return rssFeeds;
         }
         return null;
     }
