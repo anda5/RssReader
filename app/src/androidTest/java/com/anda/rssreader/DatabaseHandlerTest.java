@@ -39,6 +39,10 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
         return new WebSite(websiteTitle,websiteDescription,webSiteLink,websiteFeedlink);
     }
 
+    private WebSite createWebSiteObj(){
+        return new WebSite(3,websiteTitle,websiteDescription,webSiteLink,websiteFeedlink);
+    }
+
     public void testDatabaseHandlerGet(){
         DatabaseHandler db=new DatabaseHandler(getInstrumentation().getTargetContext());
         db.insertWebSiteObject(createWebSiteObject());
@@ -48,6 +52,7 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
         assertEquals(1,webSite.getId());
         assertEquals(1,rssFeed.getId());
     }
+
     public void testDatabaseHandlerGetList(){
         DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
         db.insertWebSiteObject(createWebSiteObject());
@@ -56,6 +61,15 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
         List<RssFeed> rssFeeds = db.getRssFeedList();
         assertFalse(webSites.isEmpty());
         assertFalse(rssFeeds.isEmpty());
+    }
+
+    public void testDatabaseHandlerGetWebSiteRssFeedList(){
+        DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
+        db.insertWebSiteObject(createWebSiteObj());
+        db.insertRssFeedSiteObject(createRssFeedObject());
+        List<RssFeed> rssFeeds = db.getWebSiteRssFeedList(createWebSiteObj().getId());
+        assertEquals(createWebSiteObj().getId(),rssFeeds.iterator().next().getWebSiteId());
+
     }
 
 }
