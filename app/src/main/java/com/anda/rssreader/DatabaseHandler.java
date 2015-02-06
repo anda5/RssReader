@@ -108,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         try {
-            if (cursor.moveToNext()) {
+            if (cursor.moveToFirst()) {
                 WebSite website = new WebSite(Integer.parseInt(cursor.getString(0)),
                         cursor.getString(1),
                         cursor.getString(2),
