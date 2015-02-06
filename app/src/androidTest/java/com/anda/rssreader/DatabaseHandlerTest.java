@@ -69,7 +69,15 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
         db.insertRssFeedSiteObject(createRssFeedObject());
         List<RssFeed> rssFeeds = db.getWebSiteRssFeedList(createWebSiteObj().getId());
         assertEquals(createWebSiteObj().getId(),rssFeeds.iterator().next().getWebSiteId());
-
+    }
+    public void testGetCountMethods(){
+        DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
+        db.insertWebSiteObject(createWebSiteObj());
+        db.insertRssFeedSiteObject(createRssFeedObject());
+        int webSiteCount=db.getWebSiteCount();
+        int feedCount=db.getWebSiteFeedCount(createWebSiteObj().getId());
+        assertTrue(webSiteCount>0);
+        assertTrue(feedCount>0);
     }
 
 }
