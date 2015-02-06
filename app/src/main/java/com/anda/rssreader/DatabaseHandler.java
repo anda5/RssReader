@@ -224,11 +224,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public boolean removeWebsiteFeeds(int websiteId){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "delete from "+TABLE_NAME_FEEDS+" where "+KEY_FEED_WEBSITE_ID+"="+websiteId;
-        Cursor cursor = db.rawQuery(query,null);
+        db.execSQL(query);
         if(getWebSiteFeedCount(websiteId)==0){
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         }
     }
 }
