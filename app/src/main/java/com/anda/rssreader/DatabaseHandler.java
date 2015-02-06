@@ -242,4 +242,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return  false;
         }
     }
+
+    public boolean deleteWebsiteObject(WebSite website){
+       SQLiteDatabase db = this.getWritableDatabase();
+       long numberowsWebsite=db.delete(TABLE_NAME_WEBSITE,KEY_WEBSITE_ID+"="+website.getId(),null);
+       long numberrowsFeed = db.delete(TABLE_NAME_FEEDS,KEY_FEED_WEBSITE_ID+"="+website.getId(),null);
+       if(numberowsWebsite>0 &&numberrowsFeed>0){ return true;}
+       else{ return false;}
+       
+    }
 }
