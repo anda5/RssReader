@@ -16,6 +16,11 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
      private String webSiteLink = "http://abcnews.go.com/";
      private String websiteFeedlink = "http://feeds.abcnews";
 
+     private String newWebSiteTitle="new title";
+     private String newWebSiteDescription="new description";
+     private String newWebSiteLink="site link";
+     private String newWebSiteFeedLink="feed link";
+
      private int websiteId = 3;
      private String feedTitle = "feed title";
      private String feedDescription = "Feed description";
@@ -85,4 +90,18 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
        assertEquals(true,db.removeWebsiteFeeds(id));
        assertEquals(0,db.getWebSiteFeedCount(id));
    }
+    public void testUpdateWebsiteObject(){
+        DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
+        WebSite website = createWebSiteObj();
+        db.insertWebSiteObject(website);
+        WebSite newWebSite=createNewWebSiteObject();
+        newWebSite.setId(website.getId());
+        boolean result = db.updateWebSiteObject(newWebSite);
+        assertEquals(true,result);
+
+    }
+    public WebSite createNewWebSiteObject(){
+        return new WebSite(newWebSiteTitle,newWebSiteDescription,newWebSiteLink,newWebSiteFeedLink);
+    }
 }
+
