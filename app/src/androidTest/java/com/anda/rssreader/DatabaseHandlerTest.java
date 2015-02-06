@@ -79,5 +79,11 @@ public class DatabaseHandlerTest extends InstrumentationTestCase{
         assertTrue(webSiteCount>0);
         assertTrue(feedCount>0);
     }
+   public void testRemoveWebSIteFeeds(){
+       DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
+       int id = createWebSiteObj().getId();
+       assertEquals(true,db.removeWebsiteFeeds(id));
+       assertEquals(0,db.getWebSiteFeedCount(id));
 
+   }
 }
