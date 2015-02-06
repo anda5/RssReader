@@ -216,7 +216,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public int getWebSiteFeedCount(int websiteId){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "select * from "+TABLE_NAME_FEEDS+" where "+KEY_WEBSITE_ID+"="+websiteId;
+        String query = "select * from "+TABLE_NAME_FEEDS+" where "+KEY_FEED_WEBSITE_ID+"="+websiteId;
         Cursor cursor = db.rawQuery(query,null);
         return  cursor.getCount();
     }
