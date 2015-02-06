@@ -220,4 +220,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query,null);
         return  cursor.getCount();
     }
+
+    public boolean removeWebsiteFeeds(int websiteId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "delete from "+TABLE_NAME_FEEDS+" where "+KEY_FEED_WEBSITE_ID+"="+websiteId;
+        Cursor cursor = db.rawQuery(query,null);
+        if(getWebSiteFeedCount(websiteId)==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }
