@@ -152,7 +152,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
                 WebSite webSite = new WebSite(Integer.parseInt(cursor.getString(0)),
                                                                cursor.getString(1),
                                                                cursor.getString(2),
@@ -160,7 +160,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                                                cursor.getString(4));
 
                 webSiteList.add(webSite);
-            }
+            }while(cursor.moveToNext());
         return  webSiteList;
         }
         return  null;
@@ -172,7 +172,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String query = "select * from "+TABLE_NAME_FEEDS;
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
              RssFeed rssfeed = new RssFeed(Integer.parseInt(cursor.getString(0)),
                                            Integer.parseInt(cursor.getString(1)),
                                            cursor.getString(2),
@@ -181,7 +181,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                            cursor.getString(5),
                                            cursor.getString(6));
              feedlist.add(rssfeed);
-            }
+            }while(cursor.moveToNext());
         return  feedlist;
         }
         return null;
@@ -193,7 +193,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst()){
-            while(cursor.moveToNext()){
+            do{
                 RssFeed rssFeed = new RssFeed(Integer.parseInt(cursor.getString(0)),
                                               Integer.parseInt(cursor.getString(1)),
                                               cursor.getString(2),
@@ -202,7 +202,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                               cursor.getString(5),
                                               cursor.getString(6));
                 rssFeeds.add(rssFeed);
-            }
+            }while(cursor.moveToNext());
         return rssFeeds;
         }
         return null;
