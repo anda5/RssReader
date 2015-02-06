@@ -207,4 +207,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         return null;
     }
+    public int getWebSiteCount() {
+        String query = "select * from "+TABLE_NAME_WEBSITE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+        return cursor.getCount();
+    }
 }
