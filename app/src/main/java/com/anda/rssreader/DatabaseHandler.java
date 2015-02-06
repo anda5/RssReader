@@ -231,4 +231,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public boolean updateWebSiteObject(WebSite website){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long i = db.update(TABLE_NAME_WEBSITE,createWebSiteContentValues(website),null,null);
+        if(i>0){
+            return true;
+        }
+        else{
+            return  false;
+        }
+    }
 }
