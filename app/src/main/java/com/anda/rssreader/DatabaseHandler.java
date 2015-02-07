@@ -249,6 +249,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
        long numberrowsFeed = db.delete(TABLE_NAME_FEEDS,KEY_FEED_WEBSITE_ID+"="+website.getId(),null);
        if(numberowsWebsite>0 &&numberrowsFeed>0){ return true;}
        else{ return false;}
-       
     }
+
 }
