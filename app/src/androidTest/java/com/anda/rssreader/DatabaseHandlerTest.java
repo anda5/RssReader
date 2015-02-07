@@ -107,9 +107,14 @@ public class DatabaseHandlerTest extends InstrumentationTestCase {
     public WebSite createNewWebSiteObject() {
         return new WebSite(newWebSiteTitle, newWebSiteDescription, newWebSiteLink, newWebSiteFeedLink);
     }
-    }
-}
-        return new WebSite(newWebSiteTitle,newWebSiteDescription,newWebSiteLink,newWebSiteFeedLink);
+
+    public void testDeleteWebsiteObject() {
+        DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
+        WebSite webSite = createWebSiteObj();
+        boolean result = db.deleteWebsiteObject(webSite);
+        assertEquals(true,result);
+        assertEquals(null,db.getWebsiteObject(webSite.getId()));
+        assertEquals(0,db.getWebSiteFeedCount(webSite.getId()));
     }
 }
 
