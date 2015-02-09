@@ -111,6 +111,8 @@ public class DatabaseHandlerTest extends InstrumentationTestCase {
     public void testDeleteWebsiteObject() {
         DatabaseHandler db = new DatabaseHandler(getInstrumentation().getTargetContext());
         WebSite webSite = createWebSiteObj();
+        int websiteId = (int) db.insertWebSiteObject(webSite);
+        webSite.setId(websiteId);
         boolean result = db.deleteWebsiteObject(webSite);
         assertEquals(true,result);
         assertEquals(null,db.getWebsiteObject(webSite.getId()));
