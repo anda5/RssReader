@@ -15,5 +15,10 @@ public class RssParserTest extends InstrumentationTestCase {
          String rssfeed = rsspars.getRssLinkFromURL("http://www.gsmarena.com/");
          assertEquals("http://www.gsmarena.com/rss-news-reviews.php3",rssfeed);
      }
+    public void testGetXMLfromURL(){
+        RssParser rssParser = new RssParser();
+        String xml = rssParser.getXMLfromURL("http://www.gsmarena.com/rss-news-reviews.php3");
+        assertTrue(xml.startsWith("<?xml"));
+    }
 
 }

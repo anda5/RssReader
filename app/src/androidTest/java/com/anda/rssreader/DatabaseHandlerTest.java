@@ -118,8 +118,9 @@ public class DatabaseHandlerTest extends InstrumentationTestCase {
         assertEquals(null,db.getWebsiteObject(webSite.getId()));
         assertEquals(0,db.getWebSiteFeedCount(webSite.getId()));
     }    
-     
+         
 }
+
 
 
 
