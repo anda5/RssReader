@@ -1,5 +1,10 @@
 package com.anda.rssreader;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -37,9 +42,20 @@ public class RssParser {
           else{
               return null;
           }
-
-
-
-
   }
+    public String getXMLfromURL(String feedUrl){
+     try{
+        DefaultHttpClient client = new DefaultHttpClient();
+        HttpEntity entity = null;
+        HttpResponse response = null;
+        HttpGet httpGet = new HttpGet(feedUrl);
+        response = client.execute(httpGet);
+        entity = response.getEntity();
+        String  responseString = EntityUtils.toString(entity);
+        return responseString;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
