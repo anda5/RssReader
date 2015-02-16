@@ -29,6 +29,17 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class RssParser {
 
+    private static final String TAG_WEBSITE_CHANEL = "chanel";
+    private static final String TAG_WEBSITE_TITLE = "title";
+    private static final String TAG_WEBSITE_DESCRIPTION = "description";
+    private static final String TAG_WEBSITE_LINK = "link";
+    private static final String TAG_FEED_ITEM = "item";
+    private static final String TAG_FEED_TITLE = "title";
+    private static final String TAG_FEED_DESCRIPTION = "description";
+    private static final String TAG_FEED_LINK = "link";
+    private static final String TAG_FEED_DATE = "pubDate";
+    private static final String TAG_FEED_IMAGE = "image";
+
   public RssParser(){
   }
 
@@ -98,4 +109,6 @@ public class RssParser {
         return  getElementValue(nodeList.item(0));
 
     }
+
+
 }
