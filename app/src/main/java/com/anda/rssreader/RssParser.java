@@ -12,6 +12,7 @@ import org.w3c.dom.Document.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Element.*;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -90,5 +91,11 @@ public class RssParser {
             return " ";
         }
         return null;
+    }
+    
+    public String getValue(Element item,String str){
+        NodeList nodeList = item.getElementsByTagName(str);
+        return  getElementValue(nodeList.item(0));
+
     }
 }
