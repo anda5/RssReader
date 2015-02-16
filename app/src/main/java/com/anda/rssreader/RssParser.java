@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 import org.w3c.dom.Document.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Element.*;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -65,6 +66,7 @@ public class RssParser {
             return null;
         }
     }
+    
     public Document getDomElement(String xml) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder  documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -72,5 +74,21 @@ public class RssParser {
         imputSource.setCharacterStream(new StringReader(xml));
         return (Document)documentBuilder.parse(imputSource);
 
+    }
+
+    public String getElementValue (Node elem){
+        if(elem!=null){
+            if(elem.hasChildNodes()){
+                for(Node child = elem.getFirstChild();child!=null;child=child.getNextSibling()){
+                    if(child.getNodeType()==Node.TEXT_NODE||child.getNodeType()==Node.CDATA_SECTION_NODE){
+                        return child.getNodeValue();}
+
+                }
+            }
+        }
+        else{
+            return " ";
+        }
+        return null;
     }
 }
