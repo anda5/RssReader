@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -138,13 +139,42 @@ public class RssParser {
       webSite.setTitle(title);
       webSite.setDescription(description);
       webSite.setSiteLink(link);
-      webSite.setFeedLink(getValue(element,TAG_FEED_ITEM));
+      webSite.setFeedLink(getValue(element,TAG_FEED_IMAGE));
       if(URL!=null){
           if(xml!=null) {
               return webSite;
           }
         }
         return null;
+    }
+
+    public List<RssFeed> getRssFeeds(String feedsURL){
+     List<RssFeed> rssFeedsList = null;
+     String xml = getXMLfromURL(feedsURL);
+     if(xml != null) {
+         Document document = getDomElement(xml);
+         NodeList nodeList = (NodeList) document.getElementsByTag(TAG_WEBSITE_CHANEL);
+         Element element = (Element) nodeList.item(0);
+         NodeList nodeList1 = element.getElementsByTagName(TAG_FEED_ITEM);
+         for (int node = 0; node < nodeList.getLength(); node++) {
+             String title = getValue((Element) nodeList1.item(node), TAG_FEED_TITLE);
+             String description = getValue((Element) nodeList1.item(node), TAG_FEED_DESCRIPTION);
+             String link = getValue((Element) nodeList1.item(node), TAG_FEED_LINK);
+             String date = getValue((Element) nodeList1.item(node), TAG_FEED_DATE);
+             String image = getValue((Element) nodeList1.item(node), TAG_FEED_IMAGE);
+             RssFeed rssFeed = new RssFeed();
+             rssFeed.setTitle(title);
+             rssFeed.setDescription(description);
+             rssFeed.setFeedLink(link);
+             rssFeed.setImageURL(image);
+             rssFeed.setDate(date);
+             rssFeedsList.add(rssFeed);
+
+         }
+         return rssFeedsList;
+     }
+    return null;
+
     }
 
 
