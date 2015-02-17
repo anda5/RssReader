@@ -1,5 +1,8 @@
 package com.anda.rssreader;
 
+import android.provider.ContactsContract;
+import android.provider.DocumentsContract;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -120,6 +123,28 @@ public class RssParser {
         NodeList nodeList = item.getElementsByTagName(str);
         return  getElementValue(nodeList.item(0));
 
+    }
+
+    public WebSite getWebSiteDetails(String url){
+      String URL = getRssLinkFromURL(url);
+      String xml = getXMLfromURL(URL);
+      Document document = getDomElement(xml);
+      NodeList nodeList = (NodeList) document.getElementsByTag(TAG_WEBSITE_CHANEL);
+      Element element = (Element) nodeList.item(0);
+      String title = getValue(element,TAG_FEED_TITLE);
+      String description =  getValue(element,TAG_WEBSITE_DESCRIPTION);
+      String link = getValue(element,TAG_WEBSITE_LINK);
+      WebSite webSite = new WebSite();
+      webSite.setTitle(title);
+      webSite.setDescription(description);
+      webSite.setSiteLink(link);
+      webSite.setFeedLink(getValue(element,TAG_FEED_ITEM));
+      if(URL!=null){
+          if(xml!=null) {
+              return webSite;
+          }
+        }
+        return null;
     }
 
 
