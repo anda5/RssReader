@@ -79,32 +79,44 @@ public class RssParser {
         }
     }
     
-    public Document getDomElement(String xml) throws ParserConfigurationException, IOException, SAXException {
+    public Document getDomElement(String xml)  {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder  documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        DocumentBuilder  documentBuilder = null;
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
         InputSource imputSource = new InputSource();
         imputSource.setCharacterStream(new StringReader(xml));
-        return (Document)documentBuilder.parse(imputSource);
+        try {
+            return (Document)documentBuilder.parse(imputSource);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        return null;
     }
 
     public String getElementValue (Node elem){
-        if(elem!=null){
+        if(elem != null){
             if(elem.hasChildNodes()){
-                for(Node child = elem.getFirstChild();child!=null;child=child.getNextSibling()){
-                    if(child.getNodeType()==Node.TEXT_NODE||child.getNodeType()==Node.CDATA_SECTION_NODE){
+                for(Node child = elem.getFirstChild();child != null;child = child.getNextSibling()){
+                    if(child.getNodeType()== Node.TEXT_NODE || child.getNodeType()== Node.CDATA_SECTION_NODE){
                         return child.getNodeValue();}
 
                 }
             }
         }
         else{
-            return " ";
+            return "";
         }
         return null;
     }
     
-    public String getValue(Element item,String str){
+    public String getValue(Element item , String str){
         NodeList nodeList = item.getElementsByTagName(str);
         return  getElementValue(nodeList.item(0));
 
