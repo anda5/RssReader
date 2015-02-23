@@ -129,6 +129,8 @@ public class RssParser {
     public WebSite getWebSiteDetails(String url){
       String URL = getRssLinkFromURL(url);
       String xml = getXMLfromURL(URL);
+        if(URL!=null){
+            if(xml!=null) {
       Document document = getDomElement(xml);
       NodeList nodeList = (NodeList) document.getElementsByTag(TAG_WEBSITE_CHANEL);
       Element element = (Element) nodeList.item(0);
@@ -136,12 +138,8 @@ public class RssParser {
       String description =  getValue(element,TAG_WEBSITE_DESCRIPTION);
       String link = getValue(element,TAG_WEBSITE_LINK);
       WebSite webSite = new WebSite();
-      webSite.setTitle(title);
-      webSite.setDescription(description);
-      webSite.setSiteLink(link);
-      webSite.setFeedLink(getValue(element,TAG_FEED_IMAGE));
-      if(URL!=null){
-          if(xml!=null) {
+      webSite.setSiteLink(url);
+      webSite.setFeedLink(URL);
               return webSite;
           }
         }
