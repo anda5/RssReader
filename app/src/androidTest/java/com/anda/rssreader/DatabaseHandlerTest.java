@@ -118,19 +118,10 @@ public class DatabaseHandlerTest extends InstrumentationTestCase {
         assertEquals(null,db.getWebsiteObject(webSite.getId()));
         assertEquals(0,db.getWebSiteFeedCount(webSite.getId()));
     }
-    public void testGetRssLinkFomURL(){
 
-        RssParser rssParser = new RssParser();
-        String rss = rssParser.getRssLinkFromURL("http://www.feedforall.com/sample-feeds.htm");
-        assertEquals("http://www.feedforall.com/blog-feed.xml",rss);
 
-    }
-    public void getXMLFromURL(){
-        RssParser rssParser = new RssParser();
-        String rss = rssParser.getXMLfromURL("http://www.feedforall.com/sample-feeds.htm");
-        assertEquals("http://www.feedforall.com/blog-feed.xml",rssParser);
-    }
-    
+
+
     }
 
 

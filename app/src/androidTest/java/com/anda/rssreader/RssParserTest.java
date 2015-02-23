@@ -10,15 +10,27 @@ import java.io.IOException;
 public class RssParserTest extends InstrumentationTestCase {
 
 
-     public void testGetRssLinkFromUrl() throws IOException {
-         RssParser rsspars = new RssParser();
-         String rssfeed = rsspars.getRssLinkFromURL("http://www.gsmarena.com/");
-         assertEquals("http://www.gsmarena.com/rss-news-reviews.php3",rssfeed);
-     }
-    public void testGetXMLfromURL(){
+
+    public void testGetRssLinkFomURL(){
         RssParser rssParser = new RssParser();
-        String xml = rssParser.getXMLfromURL("http://www.gsmarena.com/rss-news-reviews.php3");
-        assertTrue(xml.startsWith("<?xml"));
+        String rss = rssParser.getRssLinkFromURL("http://www.feedforall.com/sample-feeds.htm");
+        assertEquals("http://www.feedforall.com/blog-feed.xml",rss);
     }
+
+    public void testGetXMLFromURL(){
+        RssParser rssParser = new RssParser();
+        String rss = rssParser.getXMLfromURL("http://www.feedforall.com/sample-feeds.htm");
+        assertEquals("http://www.feedforall.com/blog-feed.xml",rssParser);
+    }
+
+    public void testGetWebSiteDetails(){
+        RssParser rssParser = new RssParser();
+        WebSite website =rssParser.getWebSiteDetails("http://www.feedforall.com/sample-feeds.htm");
+        String title = website.getTitle();
+        String description = website.getDescription();
+        assertEquals("An RSS Daily News Feed from FeedForAll - RSS Feed Creation",title);
+        assertEquals("RSS is a fascinating technology",description);
+    }
+
 
 }
