@@ -118,17 +118,26 @@ public class DatabaseHandlerTest extends InstrumentationTestCase {
         assertEquals(null,db.getWebsiteObject(webSite.getId()));
         assertEquals(0,db.getWebSiteFeedCount(webSite.getId()));
     }
-    public void testGetRssLinkFomURL(){
 
+    public void testGetRssLinkFomURL(){
         RssParser rssParser = new RssParser();
         String rss = rssParser.getRssLinkFromURL("http://www.feedforall.com/sample-feeds.htm");
         assertEquals("http://www.feedforall.com/blog-feed.xml",rss);
-
     }
+
     public void getXMLFromURL(){
         RssParser rssParser = new RssParser();
         String rss = rssParser.getXMLfromURL("http://www.feedforall.com/sample-feeds.htm");
         assertEquals("http://www.feedforall.com/blog-feed.xml",rssParser);
+    }
+
+    public void getWebSiteDetails(){
+     RssParser rssParser = new RssParser();
+     WebSite website =rssParser.getWebSiteDetails("http://www.feedforall.com/sample-feeds.htm");
+     String title = website.getTitle();
+     String description = website.getDescription();
+     assertEquals("An RSS Daily News Feed from FeedForAll - RSS Feed Creation",title);
+     assertEquals("RSS is a fascinating technology",description);
     }
     
     }
