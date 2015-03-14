@@ -4,10 +4,10 @@
     android:layout_height="wrap_content">
 <TextView
     android:id="@+id/webItemTitle"
-    android:layout_width="170pt"
-    android:layout_height="50pt" />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
    <TextView
        android:id="@+id/webItemLink"
-       android:layout_width="170pt"
-       android:layout_height="50pt" />
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
 </LinearLayout>
