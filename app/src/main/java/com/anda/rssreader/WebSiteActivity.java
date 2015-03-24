@@ -33,11 +33,7 @@ public class WebSiteActivity extends ActionBarActivity {
                     WebSite webSite = new WebSite();
                     webSite.setFeedLink(feedLink);
                     webSite.setSiteLink(siteLink);
-                    webSite.getId();
-                    webSite.getTitle();
-                    webSite.getFeedLink();
-                    webSite.getDescription();
-                    webSite.getSiteLink();
+                    webSite = rssParser.getWebsiteDetails(webSite,feedLink);
                     DatabaseHandler databaseHandler = new DatabaseHandler(getApplicationContext());
                     databaseHandler.insertWebSiteObject(webSite);
                     setResult(100);
