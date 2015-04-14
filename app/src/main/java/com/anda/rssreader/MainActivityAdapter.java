@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by anda on 3/23/2015.
  */
-public class MainActivityAdapter extends RecyclerView.Adapter {
+public abstract class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapter.ViewHolder> {
 
     private Context context;
     private List<WebSite> webSiteList;
@@ -24,21 +25,18 @@ public class MainActivityAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        view = new View(LayoutInflater.from(context).inflate(R.layout.website_list,parent).getContext());
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.website_list,parent,false);
         return new ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        
-
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.itemTitle.setText(webSiteList.get(position).getTitle());
+        holder.itemLink.setText(webSiteList.get(position).getSiteLink());
     }
-
-
     @Override
     public int getItemCount() {
         return webSiteList.size();
@@ -46,22 +44,19 @@ public class MainActivityAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
-         public View itemTitle;
-         public View itemLink;
+         public TextView itemTitle;
+         public TextView itemLink;
 
          public ViewHolder(View itemView) {
              super(itemView);
-             itemTitle = itemView.findViewById(R.id.webItemTitle);
-             itemLink = itemView.findViewById(R.id.webItemLink);
+             itemTitle = (TextView) itemView.findViewById(R.id.webItemTitle);
+             itemLink = (TextView) itemView.findViewById(R.id.webItemLink);
              itemView.setOnClickListener(this);
          }
 
          @Override
          public void onClick(View v) {
             //TODO: feed intent
-
          }
-
-
     }
 }
