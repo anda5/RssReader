@@ -2,16 +2,33 @@ package com.anda.rssreader;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 
 public class MainActivity extends ActionBarActivity {
+   private   RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+   private   RecyclerView view;
+   private   List<WebSite> webSiteList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        view.findViewById(R.id.webItemTitle);
+        view.findViewById(R.id.webSiteLink);
+        view.setHasFixedSize(true);
+        view.setLayoutManager(layoutManager);
+        DatabaseHandler db= new DatabaseHandler(this);
+        webSiteList = db.getWebsiteList();
+        MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(this,webSiteList);
+        view.setAdapter(mainActivityAdapter);
+
     }
 
 
