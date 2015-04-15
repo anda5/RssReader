@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by anda on 3/23/2015.
  */
-public abstract class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapter.ViewHolder> {
+public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapter.ViewHolder> {
 
     private Context context;
     private List<WebSite> webSiteList;
