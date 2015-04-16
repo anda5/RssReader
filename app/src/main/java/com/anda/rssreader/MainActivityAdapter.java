@@ -2,6 +2,7 @@ package com.anda.rssreader;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,10 @@ public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapt
          @Override
          public void onClick(View v) {
             //TODO: feed intent
+             Intent intent = new Intent(context,FeedActivity.class);
+             intent.putExtra("ID",getPosition());
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             context.startActivity(intent);
          }
     }
 }
