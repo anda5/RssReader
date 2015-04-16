@@ -23,6 +23,10 @@
             android:name=".WebSiteActivity"
             android:label="@string/title_activity_web_site" >
         </activity>
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/title_activity_feed" >
+        </activity>
     </application>
 
 </manifest>
