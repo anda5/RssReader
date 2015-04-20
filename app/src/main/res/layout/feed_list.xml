@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<TextView
+    android:id="@+id/feedTitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="32sp"
+    />
+<ImageView
+        android:id="@+id/feedImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:visibility="gone"/>
+<TextView
+    android:id="@+id/feedDescription"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="3"
+    android:textColor="@color/grayish"
+    android:textSize="12sp"
+    />
+    <TextView
+        android:id="@+id/dateFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>
