@@ -1,17 +1,31 @@
 package com.anda.rssreader;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class FeedActivity extends ActionBarActivity {
 
+    Intent intent;
+    WebSite webSite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        intent = getIntent();
+        if(intent.hasExtra("_id")){
+        DatabaseHandler db = new DatabaseHandler(this);
+        webSite = db.getWebsiteObject(intent.getExtras().getInt("_id"));
+        }else
+        {
+            Toast.makeText(this,"There is no website info",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
     }
 
 
