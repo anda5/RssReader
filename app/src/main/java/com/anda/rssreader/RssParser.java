@@ -41,7 +41,7 @@ public class RssParser {
     public String getRssLinkFromURL(String url) {
         Document doc = null;
         try {
-            doc = Jsoup.connect(url).get();
+            doc =  Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").get();
         } catch (IOException e) {
             e.printStackTrace();
         }
