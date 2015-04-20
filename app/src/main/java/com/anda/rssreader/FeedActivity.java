@@ -17,9 +17,9 @@ public class FeedActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         intent = getIntent();
-        if(intent.hasExtra("_id")){
+        if(intent.hasExtra("ID")){
         DatabaseHandler db = new DatabaseHandler(this);
-        webSite = db.getWebsiteObject(intent.getExtras().getInt("_id"));
+        webSite = db.getWebsiteObject(intent.getExtras().getInt("ID"));
         }else
         {
             Toast.makeText(this,"There is no website info",Toast.LENGTH_SHORT).show();

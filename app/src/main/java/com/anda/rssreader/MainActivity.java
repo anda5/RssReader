@@ -1,6 +1,7 @@
 package com.anda.rssreader;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,7 +56,9 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_new) {
+            Intent intent = new Intent(this,WebSiteActivity.class);
+            startActivity(intent);
             return true;
         }
 
