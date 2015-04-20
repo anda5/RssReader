@@ -1,18 +1,19 @@
 package com.anda.rssreader;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
    private   RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-   private   RecyclerView view;
+   private   RecyclerView recyclerView;
    private   List<WebSite> webSiteList;
 
 
@@ -20,14 +21,21 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        view.findViewById(R.id.webItemTitle);
-        view.findViewById(R.id.webSiteLink);
-        view.setHasFixedSize(true);
-        view.setLayoutManager(layoutManager);
+
         DatabaseHandler db= new DatabaseHandler(this);
         webSiteList = db.getWebsiteList();
+
+        recyclerView=(RecyclerView)findViewById(R.id.listsView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        if(webSiteList!=null){
         MainActivityAdapter mainActivityAdapter = new MainActivityAdapter(this,webSiteList);
-        view.setAdapter(mainActivityAdapter);
+        recyclerView.setAdapter(mainActivityAdapter);
+        recyclerView.setVisibility(View.VISIBLE);
+        }else{
+        recyclerView.setVisibility(View.GONE);
+        }
+
 
     }
 
