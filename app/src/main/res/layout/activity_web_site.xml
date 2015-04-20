@@ -9,12 +9,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/webSiteLink"/>
+        android:id="@+id/webSiteLink"
+        android:hint="http//"/>
 
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/webSiteButton"/>
+        android:id="@+id/webSiteButton"
+        android:layout_below="@+id/webSiteLink"
+        android:text="Add Website"
+        />
 
 </RelativeLayout>
