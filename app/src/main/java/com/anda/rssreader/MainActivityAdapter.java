@@ -62,6 +62,7 @@ public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapt
              intent.putExtra("ID",getPosition());
              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
              context.startActivity(intent);
+
          }
     }
 }
