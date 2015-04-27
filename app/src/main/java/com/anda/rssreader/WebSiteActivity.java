@@ -30,7 +30,8 @@ public class WebSiteActivity extends Activity {
             public void onClick(View v) {
             if (!editText.toString().isEmpty()) {
               ProcessWebSite processWebSite = new ProcessWebSite();
-              processWebSite.execute(editText.getText().toString());
+              processWebSite.execute(Utils.fullyQualifiedName(editText.getText().toString()));
+
                 } else {
                        Toast.makeText(getApplicationContext(), "Please enter website link", Toast.LENGTH_SHORT).show();
                 }
