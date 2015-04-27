@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_new) {
             Intent intent = new Intent(this,WebSiteActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,1);
             return true;
         }
 
