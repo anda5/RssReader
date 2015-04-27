@@ -60,7 +60,9 @@ public class WebSiteActivity extends Activity {
             }
             return null;
         }
-        protected void onPostExecute(String msg) {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
             setResult(100);
             finish();
         }
