@@ -29,9 +29,13 @@ public class Utils {
         String first = tokens.nextToken();
         String second = tokens.nextToken();
        if(tokens.hasMoreTokens()){
-        return text;
+             return text;
         }else{
-           return "www."+text;
+           if(text.contains("www")){
+               return  "http://"+text;
+           }else {
+               return "http://www." + text;
+           }
        }
 
 
