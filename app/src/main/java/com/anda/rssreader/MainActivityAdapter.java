@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,8 @@ public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapt
         return webSiteList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener ,View.OnCreateContextMenuListener {
 
          public TextView itemTitle;
          public TextView itemLink;
@@ -52,7 +54,9 @@ public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapt
              super(itemView);
              itemTitle = (TextView) itemView.findViewById(R.id.webItemTitle);
              itemLink = (TextView) itemView.findViewById(R.id.webItemLink);
+             itemView.setOnCreateContextMenuListener(this);
              itemView.setOnClickListener(this);
+
          }
 
          @Override
@@ -61,8 +65,18 @@ public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapt
              Intent intent = new Intent(context,FeedActivity.class);
              intent.putExtra("ID",getPosition());
              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
              context.startActivity(intent);
 
+
          }
+
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.setHeaderTitle("Delete website");
+            menu.removeItem(itemLink.getId());
+
+        }
     }
 }
