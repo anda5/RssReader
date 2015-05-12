@@ -24,21 +24,9 @@ public class Utils {
     }
 
     public static String fullyQualifiedName(String text){
-
-        StringTokenizer tokens = new StringTokenizer(text,".");
-        String first = tokens.nextToken();
-        String second = tokens.nextToken();
-       if(tokens.hasMoreTokens()){
-             return text;
-        }else{
-           if(text.contains("www")){
-               return  "http://"+text;
-           }else {
-               return "http://www." + text;
-           }
-       }
-
-
+        if(!text.contains("www.")){text = "www."+text;}
+        if(!text.contains("http://")){text = "http//"+text;}
+        return  text;
     }
 
 }
