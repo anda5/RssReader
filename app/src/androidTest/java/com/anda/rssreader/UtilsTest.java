@@ -16,9 +16,11 @@ public class UtilsTest extends InstrumentationTestCase {
        assertTrue(checkConnection);
     }
     public void testFullyQualifiedName(){
-        String test = "facebook.com";
-        String text = Utils.fullyQualifiedName(test);
-        assertEquals("www.facebook.com",text);
+        String expectedUrl = "facebook.com";
+        String[] urls={"facebook.com","www.facebook.com","http://www.facebook.com"};
+        for(String url:urls) {
+            assertEquals("www.facebook.com", Utils.fullyQualifiedName(url));
+        }
     }
 
 
