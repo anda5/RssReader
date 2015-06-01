@@ -25,7 +25,7 @@ public class Utils {
 
     public static String fullyQualifiedName(String text){
         if(!text.contains("www.")){text = "www."+text;}
-        if(!text.contains("http://")){text = "http//"+text;}
+        if(!text.contains("http://")){text = "http://"+text;}
         return  text;
     }
 
