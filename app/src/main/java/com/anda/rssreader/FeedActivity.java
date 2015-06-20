@@ -1,24 +1,37 @@
 package com.anda.rssreader;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class FeedActivity extends ActionBarActivity {
-
+public class FeedActivity extends Activity {
+    DatabaseHandler db ;
     Intent intent;
     WebSite webSite;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        RecyclerView.LayoutManager layoutManager = new RecyclerView.LayoutManager() {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+               recyclerView.findViewById(webSite.getId());
+               recyclerView.setHasFixedSize(true);
+               recyclerView.setLayoutManager(this);
+                return  null;
+
+            }
+        };
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        db = new DatabaseHandler(getApplicationContext());
         intent = getIntent();
         if(intent.hasExtra("ID")){
-        DatabaseHandler db = new DatabaseHandler(this);
         webSite = db.getWebsiteObject(intent.getExtras().getInt("ID"));
         }else
         {

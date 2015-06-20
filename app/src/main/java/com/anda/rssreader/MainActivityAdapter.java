@@ -63,7 +63,7 @@ public  class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapt
          public void onClick(View v) {
             //TODO: feed intent
              Intent intent = new Intent(context,FeedActivity.class);
-             intent.putExtra("ID",getPosition());
+             intent.putExtra("ID",webSiteList.get(getPosition()).getId());
              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
              context.startActivity(intent);
