@@ -82,9 +82,9 @@ public class RssParser {
         return site;
     }
 
-    public List<RssFeed> getFeedDetails (WebSite site, String xml) {
+    public List<RssFeed> getFeedDetails (WebSite site) {
         List<RssFeed> rssList = new ArrayList<>();
-        Document doc = Jsoup.parse(xml, "", Parser.xmlParser());
+        Document doc = Jsoup.parse(getXMLFromURL(site.getFeedLink()), "", Parser.xmlParser());
 
         Elements title = doc.select("item > title");
         Elements description = doc.select("item > description");
